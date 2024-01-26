@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./SelectLevelPage.module.css";
+import { EnableDifficultLevel } from "../../components/enableDifficultLevel/enableDifficultLevel.jsx";
+//import { check } from "prettier";
 
 export function SelectLevelPage() {
   return (
@@ -23,6 +25,7 @@ export function SelectLevelPage() {
             </Link>
           </li>
         </ul>
+        <EnableDifficultLevel />
       </div>
     </div>
   );
