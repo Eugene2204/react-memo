@@ -10,15 +10,24 @@
     -ms-user-select: none;
     user-select: none;
   }
+
+  .heading {
+    font-family: "Roboto", sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 32px;
+    padding-left: 12px;
+  }
   
   .input {
     position: absolute;
     top: 0;
     left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
+    background-color: #FFFFFF;
     border-radius: 50%;
     cursor: pointer;
+    width: 30px;
+    height: 29px;
+    flex-shrink: 0;
   }
   
