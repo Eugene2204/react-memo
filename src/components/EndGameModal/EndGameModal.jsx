@@ -10,20 +10,20 @@ import { Link } from "react-router-dom";
 import { addLeader } from "../../api";
 
 export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, onClick }) {
-  const [username, setUsername] = useState("Пользователь");
+  const [username, setUsername] = useState("");
   const [isFinishedAddingToLeaderboard, setIsFinishedAddingToLeaderboard] = useState(false);
   const buttonRef = useRef();
 
   const time = gameDurationMinutes * 60 + gameDurationSeconds;
   const currentLevel = useSelector(state => state.game.currentLevel);
-  const isActiveEasyMode = useSelector(state => state.game.isActiveEasyMode);
+  const isActiveGameMode = useSelector(state => state.game.isActiveGameMode);
   const leaders = useSelector(state => state.game.leaders);
   const isLeader = leaders.filter(leader => {
     return leader.time > time;
   });
 
   function isAddToLeaders() {
-    if (isWon === true && isLeader.length > 0 && currentLevel === 9 && isActiveEasyMode === false) {
+    if (isWon === true && isLeader.length > 0 && currentLevel === 9 && isActiveGameMode === false) {
       return true;
     } else {
       return false;
@@ -54,10 +54,11 @@ export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, 
         <>
           <input
             className={styles.username}
-            type="text"
             placeholder="Пользователь"
             value={username}
-            onChange={event => setUsername(event.target.value)}
+            onChange={event => {
+              setUsername(event.target.value);
+            }}
           />
           <button className={styles.addButton} ref={buttonRef} onClick={() => addToLeaderboard({ username, time })}>
             Отправить

@@ -2,7 +2,7 @@ import styles from "./LeaderBoard.module.css";
 import { Button } from "../../components/Button/Button";
 import { LeaderBoardItem } from "../../components/LeaderBoardItem/LeaderBoardItem";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { getLeaders } from "../../api.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { setLeaders } from "../../store/slices.jsx";
@@ -17,16 +17,19 @@ export const LeaderBoard = () => {
     getLeaders().then(leaders => dispatch(setLeaders(leaders)));
   }, [dispatch]);
 
+  const sortedLeaders = useMemo(() => {
+    return [...leaders].sort((a, b) => a.time - b.time);
+  }, [leaders]);
+
   return (
     <div className={styles.container}>
       <div className={styles.content}>
         <div className={styles.top}>
           <h1 className={styles.heading}>Лидерборд</h1>
           <Button children={"Начать игру"} onClick={() => navigate("/")} />
-          <Button children={"Начать игру"} />
         </div>
         <LeaderBoardItem isTemplate={true} />
-        {leaders.map(leader => {
+        {sortedLeaders.map(leader => {
           return (
             <LeaderBoardItem
               key={leader.id}
