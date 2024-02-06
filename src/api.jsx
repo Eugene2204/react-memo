@@ -10,8 +10,11 @@ export function getLeaders() {
   });
 }
 
-export function addLeader({ username, time }) {
-  return fetch(host, { method: "POST", body: JSON.stringify({ name: username, time: time }) }).then(response => {
+export function addLeader({ username, time, achievements }) {
+  return fetch(host, {
+    method: "POST",
+    body: JSON.stringify({ name: username, time: time, achievements: achievements() }),
+  }).then(response => {
     if (!response.ok) {
       console.log("Что-то пошло не так");
     }

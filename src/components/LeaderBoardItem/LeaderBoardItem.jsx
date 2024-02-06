@@ -1,6 +1,7 @@
 import styles from "./LeaderBoardItem.module.css";
+import { Achievements } from "../Achievements/Achievements";
 
-export const LeaderBoardItem = ({ position, user, time, isTemplate }) => {
+export const LeaderBoardItem = ({ position, user, time, isTemplate, achievements }) => {
   let minutes = Math.floor(time / 60);
   let seconds = Math.round(time % 60);
 
@@ -15,6 +16,9 @@ export const LeaderBoardItem = ({ position, user, time, isTemplate }) => {
     <div className={styles.container}>
       <p className={isTemplate ? styles.template : styles.item}>{isTemplate ? "Позиция" : `# ${position}`}</p>
       <p className={isTemplate ? styles.template : styles.item}>{isTemplate ? "Пользователь" : user}</p>
+      <div className={isTemplate ? styles.template : styles.item}>
+        {isTemplate ? "Достижения" : <Achievements achievements={achievements} />}
+      </div>
       <p className={isTemplate ? styles.template : styles.item}>{isTemplate ? "Время" : `${minutes}:${seconds}`}</p>
     </div>
   );
